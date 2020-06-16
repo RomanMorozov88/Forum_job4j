@@ -1,27 +1,31 @@
 package ru.job4j.forum.model;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class Post {
 
-    private int id;
+    private Integer id;
+    private User author;
     private String name;
     private String desc;
-    private Calendar created;
+    private Calendar created = new GregorianCalendar();
 
-    public static Post of(String name) {
-        Post post = new Post();
-        post.name = name;
-        return post;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public String getName() {
@@ -54,6 +58,7 @@ public class Post {
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
         return id == post.id &&
+                Objects.equals(author, post.author) &&
                 Objects.equals(name, post.name) &&
                 Objects.equals(desc, post.desc) &&
                 Objects.equals(created, post.created);
@@ -61,6 +66,6 @@ public class Post {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, desc, created);
+        return Objects.hash(id, author, name, desc, created);
     }
 }
