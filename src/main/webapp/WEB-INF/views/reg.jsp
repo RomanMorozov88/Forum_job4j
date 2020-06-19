@@ -15,7 +15,7 @@
         <table>
             <tr>
                 <td>UserName:</td>
-                <td><input type='text' name='username'></td>
+                <td><input type='text' name='name'></td>
             </tr>
             <tr>
                 <td>Password:</td>
@@ -24,7 +24,7 @@
             <tr>
                 <td>Role:</td>
                 <td>
-                    <select name='role'>
+                    <select name='roles'>
                         <option value="ROLE_ADMIN">Admin</option>
                         <option value="ROLE_USER">User</option>
                     </select>

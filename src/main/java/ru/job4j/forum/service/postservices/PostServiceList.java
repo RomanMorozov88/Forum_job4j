@@ -21,7 +21,7 @@ public class PostServiceList implements PostService {
 
     @Override
     public void savePost(Post post) {
-        if (post.getId() == null) {
+        if (post.getId() == null || post.getId() == -1) {
             post.setId(idCount++);
             this.posts.add(post);
         } else {

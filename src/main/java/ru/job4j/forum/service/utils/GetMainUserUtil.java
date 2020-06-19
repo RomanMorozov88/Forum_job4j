@@ -8,8 +8,8 @@ import ru.job4j.forum.model.User;
 import ru.job4j.forum.service.userservices.UserService;
 
 /**
- *Содержит методы для избавления от повторябщего кода
- *  в следующих классах:
+ * Содержит методы для избавления от повторябщего кода
+ * в следующих классах:
  * IndexControl
  * PostEditControl
  * PostControl
@@ -20,11 +20,13 @@ public class GetMainUserUtil {
     @Autowired
     private UserService userService;
 
-    public GetMainUserUtil(){}
+    public GetMainUserUtil() {
+    }
 
     /**
      * Метод возвращает авторизованного в данной сессии пользователя
      * если он есть.
+     *
      * @return UserDetails
      */
     public UserDetails getCurrentUserDetails() {
@@ -43,8 +45,11 @@ public class GetMainUserUtil {
      */
     public User getCurrentUser() {
         User result = null;
-        String userName = this.getCurrentUserDetails().getUsername();
-        result = userService.getByName(userName);
+        UserDetails bufferUserDetails = this.getCurrentUserDetails();
+        if (bufferUserDetails != null) {
+            String userName = bufferUserDetails.getUsername();
+            result = userService.getByName(userName);
+        }
         return result;
     }
 

@@ -4,39 +4,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.User;
+import ru.job4j.forum.service.repositories.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Сервис для хранения пользователей в List.
+ * UserService с использованием UserRepository extends CrudRepository<User, Long>
  */
 @Service
-public class UserServiceList implements UserService {
+public class UserServiceRepo implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
 
-    private List<User> users = new CopyOnWriteArrayList<>();
-
-    public UserServiceList() {
+    public UserServiceRepo() {
     }
 
     @Override
     public User getByName(String name) {
-        User result = null;
-        for (User u : this.users) {
-            if (u.getName().equals(name)) {
-                result = u;
-                break;
-            }
-        }
-        return result;
+        return userRepository.findByName(name);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return this.users;
+        List<User> result = new ArrayList<>();
+        userRepository.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
@@ -45,7 +41,7 @@ public class UserServiceList implements UserService {
         if (this.getByName(user.getName()) == null) {
             String bufferPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(bufferPassword);
-            this.users.add(user);
+            this.userRepository.save(user);
             result = true;
         }
         return result;
@@ -53,6 +49,6 @@ public class UserServiceList implements UserService {
 
     @Override
     public void deleteUser(User user) {
-        this.users.remove(user);
+        this.userRepository.delete(user);
     }
 }

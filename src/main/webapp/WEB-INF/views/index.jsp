@@ -23,7 +23,7 @@
                     <button class="btn btn-secondary">Sign Out</button>
                 </form>
                 <form action="<c:url value='/edit?id=-1'/>" method="GET">
-                    <button class="btn btn-secondary">Edit\Create</button>
+                    <button class="btn btn-secondary">Create</button>
                 </form>
             </div>
         </c:when>

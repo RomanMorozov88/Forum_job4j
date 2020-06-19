@@ -6,14 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.forum.model.Post;
-import ru.job4j.forum.service.postservices.PostServiceList;
+import ru.job4j.forum.model.User;
+import ru.job4j.forum.service.postservices.PostService;
 import ru.job4j.forum.service.utils.GetMainUserUtil;
 
 @Controller
 public class PostControl {
 
     @Autowired
-    private PostServiceList postServiceList;
+    private PostService postService;
     @Autowired
     private GetMainUserUtil getMainUserUtil;
 
@@ -32,9 +33,10 @@ public class PostControl {
     ) {
         boolean editFlag = false;
         int id = Integer.parseInt(postId);
-        Post post = this.postServiceList.getPostById(id);
+        Post post = this.postService.getPostById(id);
         if (id != -1 && post != null) {
-            if (post.getAuthor().equals(this.getMainUserUtil.getCurrentUser())) {
+            User bufferUser = this.getMainUserUtil.getCurrentUser();
+            if (post.getAuthor().equals(bufferUser)) {
                 editFlag = true;
             }
             model.addAttribute("editFlag", editFlag);

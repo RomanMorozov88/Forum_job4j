@@ -12,19 +12,19 @@ import ru.job4j.forum.service.userservices.UserService;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserService users;
+    private UserService userService;
 
     public UserDetailsServiceImpl() {
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = this.users.getByName(s);
+        User user = this.userService.getByName(s);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
         return new org.springframework.security.core.userdetails
-                .User(user.getUserName(), user.getUserPassword(), user.getRoles());
+                .User(user.getName(), user.getPassword(), user.getRoles());
     }
 
 }

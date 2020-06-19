@@ -32,10 +32,10 @@
         <p><c:out value="${currentPost.name}"/></p><br/>
         <th/>
         <h4 scope="col">Текст</h4><br/>
-        <p><c:out value="${currentPost.desc}"/><p/><br/>
+        <p><c:out value="${currentPost.description}"/><p/><br/>
         <th/>
         <h4 scope="col">Автор</h4><br/>
-        <p><c:out value="${currentPost.author.userName}"/><p/><br/>
+        <p><c:out value="${currentPost.author.name}"/><p/><br/>
         <th/>
         <h4 scope="col">Дата создания</h4><br/>
         <p><c:out value="${currentPost.created.getTime()}"/><p/><br/>
