@@ -33,14 +33,16 @@ public class PostControl {
     ) {
         boolean editFlag = false;
         int id = Integer.parseInt(postId);
-        Post post = this.postService.getPostById(id);
-        if (id != -1 && post != null) {
-            User bufferUser = this.getMainUserUtil.getCurrentUser();
-            if (post.getAuthor().equals(bufferUser)) {
-                editFlag = true;
+        if (id != -1) {
+            Post post = this.postService.getPostById(id);
+            if (post != null) {
+                User bufferUser = this.getMainUserUtil.getCurrentUser();
+                if (post.getAuthor().equals(bufferUser)) {
+                    editFlag = true;
+                }
+                model.addAttribute("editFlag", editFlag);
+                model.addAttribute("currentPost", post);
             }
-            model.addAttribute("editFlag", editFlag);
-            model.addAttribute("currentPost", post);
         } else {
             model.addAttribute("errorMessage", "Post not found.");
         }
