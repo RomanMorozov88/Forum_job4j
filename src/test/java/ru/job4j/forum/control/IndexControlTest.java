@@ -22,7 +22,7 @@ import ru.job4j.forum.service.utils.GetMainUserUtil;
 
 import java.util.ArrayList;
 
-@SpringBootTest(classes = Main.class)
+@SpringBootTest(classes = Main.class, properties = "spring.main.allow-bean-definition-overriding=true")
 @AutoConfigureMockMvc
 public class IndexControlTest {
 
