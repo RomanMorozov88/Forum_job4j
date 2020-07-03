@@ -44,12 +44,12 @@
     </div>
 </div>
 <th/>
-<div>
+<div class="container mt-3">
     <c:if test="${editFlag}">
         <div>
             <form action="<c:url value="/edit"/>" method="GET">
                 <input type="hidden" name="postid" value="${currentPost.id}"/>
-                <input type="submit" value="Edit"/>
+                <input class="btn btn-secondary" type="submit" value="Edit"/>
             </form>
         </div>
     </c:if>

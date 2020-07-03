@@ -14,46 +14,48 @@
     <title>Форум job4j</title>
 </head>
 <body>
-<div class="container text-center">
+<div class="container text-right">
     <c:choose>
         <c:when test="${currentuser.username != null}">
             ${currentuser.username}
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group">
                 <form action="<c:url value='/logout'/>" method="GET">
-                    <button class="btn btn-secondary">Sign Out</button>
+                    <button class="btn btn-default btn-sm">Sign Out</button>
                 </form>
                 <form action="<c:url value='/edit?id=-1'/>" method="GET">
-                    <button class="btn btn-secondary">Create</button>
+                    <button class="btn btn-default btn-sm">Create</button>
                 </form>
             </div>
         </c:when>
         <c:otherwise>
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group">
                 <form action="<c:url value='/login'/>" method="GET">
-                    <button class="btn btn-secondary">Sign In</button>
+                    <button class="btn btn-default btn-sm">Sign In</button>
                 </form>
                 <form action="<c:url value='/reg'/>" method="GET">
-                    <button class="btn btn-secondary">Sign Up</button>
+                    <button class="btn btn-default btn-sm">Sign Up</button>
                 </form>
             </div>
         </c:otherwise>
     </c:choose>
 </div>
 <div class="container mt-3">
-    <div class="row">
+    <div class="container text-center">
         <h4>Форум job4j</h4>
     </div>
     <div class="row">
-        <table class="table">
-            <thead>
+        <table class="table table-bordered">
+            <thead class="thead-light">
             <tr>
-                <th scope="col">Тема</th>
+                <th style="width: 70%" scope="col">Тема</th>
+                <th style="width: 30%" scope="col">Дата создания</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${posts}" var="post">
                 <tr>
                     <td><a href="<c:url value="/post?id=${post.id}"/>"><c:out value="${post.name}"/></a></td>
+                    <td><c:out value="${post.created.getTime()}"/></td>
                 </tr>
             </c:forEach>
             </tbody>

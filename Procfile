@@ -1,0 +1,1 @@
+web: java -jar target/Forum-1.jar --spring.config.location=heroku.properties
